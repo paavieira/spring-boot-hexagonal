@@ -13,7 +13,7 @@ A quickstart project for "spring-boot-gradle"-based java applications, using a h
 
 ### Application Layer
 
-![](diagram/architecture-domain-layer.png)
+![](diagram/architecture-application-layer.png)
 
 ### Framework Layer
 
