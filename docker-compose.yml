@@ -1,0 +1,14 @@
+version: '3'
+services:
+  spring-boot-hexagonal:
+    image: com.paavieira.quickstarts/spring-boot-hexagonal
+    ports:
+    - "8080:8080"
+    links:
+    - mongo
+    environment:
+    - SPRING_PROFILES_ACTIVE=production
+    - MONGODB_URI=mongodb://mongo:27017/test
+  mongo:
+    image: mongo
+    restart: always

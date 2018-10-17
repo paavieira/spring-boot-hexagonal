@@ -1,0 +1,26 @@
+# Compiled class file
+*.class
+
+# Package files
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+*.iml
+**/*.vsix
+
+# Gradle files
+.gradle
+/build/
+/bin/
+!gradle-wrapper.jar
+
+# Eclipse files
+.settings
+.classpath
+.project
+
+# VS Code files
+.vscode/
