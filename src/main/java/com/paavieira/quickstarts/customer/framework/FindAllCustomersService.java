@@ -12,20 +12,21 @@ import org.springframework.stereotype.Service;
 @Service
 public class FindAllCustomersService {
 
-	private FindAllCustomersCommandHandler handler;
+	private CustomerCommandHandlerResolver handlerResolver;
 	private CustomerEntityConverter converter;
 
 	public FindAllCustomersService(
-		CustomerRepository repository,
+		CustomerCommandHandlerResolver handlerResolver,
 		CustomerEntityConverter converter
 	) {
-		this.handler = new FindAllCustomersCommandHandler(repository); // TODO: how to inject the handler without any framework dependencies?
+		this.handlerResolver = handlerResolver;
 		this.converter = converter;
 	}
 
 	public List<CustomerEntity> findAll() {
 		final FindAllCustomersCommand command = new FindAllCustomersCommand();
-		final List<Customer> customers = this.handler.handle(command);
+		final FindAllCustomersCommandHandler handler = (FindAllCustomersCommandHandler) this.handlerResolver.resolve(command);
+		final List<Customer> customers = handler.handle(command);
 		return customers.stream().map(customer -> this.converter.convert(customer)).collect(Collectors.toList());
 	}
 

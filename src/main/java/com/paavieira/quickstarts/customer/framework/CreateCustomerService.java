@@ -9,20 +9,21 @@ import org.springframework.stereotype.Service;
 @Service
 public class CreateCustomerService {
 
-	private CreateCustomerCommandHandler handler;
+	private CustomerCommandHandlerResolver handlerResolver;
 	private CustomerEntityConverter converter;
 
 	public CreateCustomerService(
-		CustomerRepository repository,
+		CustomerCommandHandlerResolver handlerResolver,
 		CustomerEntityConverter converter
 	) {
-		this.handler = new CreateCustomerCommandHandler(repository); // TODO: how to inject the handler without any framework dependencies?
+		this.handlerResolver = handlerResolver;
 		this.converter = converter;
 	}
 
 	public CustomerEntity save(final CustomerEntity entity) {
 		final CreateCustomerCommand command = new CreateCustomerCommand(entity.getFirstName(), entity.getLastName());
-		final Customer customer = this.handler.handle(command).get(0);
+		final CreateCustomerCommandHandler handler = (CreateCustomerCommandHandler) this.handlerResolver.resolve(command);
+		final Customer customer = handler.handle(command).get(0);
 		return this.converter.convert(customer);
 	}
 
