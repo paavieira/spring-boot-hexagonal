@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface Repository<M extends Model> {
 
-	M save(M customer);
+	M save(M model);
 
 	List<M> findAll();
 
