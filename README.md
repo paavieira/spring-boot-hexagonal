@@ -1,6 +1,10 @@
 # spring-boot-hexagonal
 A quickstart project for "spring-boot-gradle"-based java applications, using a hexagonal architecture.
 
+## Architecture
+
+![](architecture.png)
+
 ## Dependencies
 
 - Docker & docker-compose
