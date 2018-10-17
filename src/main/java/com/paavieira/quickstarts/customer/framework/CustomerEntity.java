@@ -12,9 +12,14 @@ public class CustomerEntity {
 
 	public CustomerEntity() {}
 
-	public CustomerEntity(String firstName, String lastName) {
+	public CustomerEntity(String id, String firstName, String lastName) {
+		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
+	}
+
+	public CustomerEntity(String firstName, String lastName) {
+		this(null, firstName, lastName);
 	}
 
 	public String getId() {

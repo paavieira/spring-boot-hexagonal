@@ -7,23 +7,23 @@ import com.paavieira.quickstarts.customer.domain.Customer;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CustomerService {
+public class CreateCustomerService {
 
 	private CreateCustomerCommandHandler handler;
+	private CustomerEntityConverter converter;
 
-	public CustomerService(CustomerRepository repository) {
-		// TODO: how to inject the handler without any framework dependencies?
-		this.handler = new CreateCustomerCommandHandler(repository);
+	public CreateCustomerService(
+		CustomerRepository repository,
+		CustomerEntityConverter converter
+	) {
+		this.handler = new CreateCustomerCommandHandler(repository); // TODO: how to inject the handler without any framework dependencies?
+		this.converter = converter;
 	}
 
-	public CustomerEntity save(CustomerEntity entity) {
+	public CustomerEntity save(final CustomerEntity entity) {
 		final CreateCustomerCommand command = new CreateCustomerCommand(entity.getFirstName(), entity.getLastName());
 		final Customer customer = this.handler.handle(command).get(0);
-		final CustomerEntity customerEntity = new CustomerEntity();
-		customerEntity.setId(customer.getId());
-		customerEntity.setFirstName(customer.getFirstName());
-		customerEntity.setLastName(customer.getLastName());
-		return customerEntity;
+		return this.converter.convert(customer);
 	}
 
 }
