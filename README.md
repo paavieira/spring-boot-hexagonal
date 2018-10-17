@@ -3,7 +3,21 @@ A quickstart project for "spring-boot-gradle"-based java applications, using a h
 
 ## Architecture
 
-![](architecture.png)
+### Overview
+
+![](diagram/architecture-overview.png)
+
+### Domain Layer
+
+![](diagram/architecture-domain-layer.png)
+
+### Application Layer
+
+![](diagram/architecture-domain-layer.png)
+
+### Framework Layer
+
+![](diagram/architecture-framework-layer.png)
 
 ## Dependencies
 
