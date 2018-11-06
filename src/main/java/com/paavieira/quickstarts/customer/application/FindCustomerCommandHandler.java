@@ -2,7 +2,6 @@ package com.paavieira.quickstarts.customer.application;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import com.paavieira.quickstarts.architecture.domain.CommandHandler;
 import com.paavieira.quickstarts.customer.domain.Customer;
