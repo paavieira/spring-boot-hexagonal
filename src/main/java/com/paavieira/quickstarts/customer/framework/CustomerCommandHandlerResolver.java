@@ -3,6 +3,7 @@ package com.paavieira.quickstarts.customer.framework;
 import com.paavieira.quickstarts.architecture.application.CommandHandlerResolver;
 import com.paavieira.quickstarts.architecture.domain.Command;
 import com.paavieira.quickstarts.architecture.domain.CommandHandler;
+import com.paavieira.quickstarts.architecture.framework.BadRequestException;
 import com.paavieira.quickstarts.customer.application.CreateCustomerCommandHandler;
 import com.paavieira.quickstarts.customer.application.FindAllCustomersCommandHandler;
 import com.paavieira.quickstarts.customer.application.FindCustomerCommandHandler;
@@ -30,7 +31,7 @@ public class CustomerCommandHandlerResolver implements CommandHandlerResolver {
 		} else if (command instanceof FindCustomerCommand) {
 			return new FindCustomerCommandHandler(repository);
 		} else {
-			throw new IllegalArgumentException("Invalid command");
+			throw new BadRequestException();
 		}
 	}
 
