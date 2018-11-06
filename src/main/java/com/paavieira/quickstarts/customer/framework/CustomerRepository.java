@@ -1,6 +1,7 @@
 package com.paavieira.quickstarts.customer.framework;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.paavieira.quickstarts.architecture.domain.Repository;
@@ -21,6 +22,11 @@ public class CustomerRepository implements Repository<Customer> {
 	public Customer save(Customer customer) {
 		final CustomerEntity entity = repository.save(new CustomerEntity(customer.getFirstName(), customer.getLastName()));
 		return this.convert(entity);
+	}
+
+	@Override
+	public Optional<Customer> find(String id) {
+		return repository.findById(id).map(entity -> this.convert(entity));
 	}
 
 	@Override
