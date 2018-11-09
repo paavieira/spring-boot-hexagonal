@@ -1,42 +1,45 @@
 # valid
 POST http://localhost:8080/customers
-Accept: application/yaml, application/json
 Content-Type: application/json
 
-{"firstName": "Paulo", "lastName": "Vieira"}
+{"firstName": "Fake", "lastName": "Person", "email": "valid@fake.com"}
 
 ###
 
 # missing first name
 POST http://localhost:8080/customers
-Accept: application/yaml, application/json
 Content-Type: application/json
 
-{"lastName": "Vieira"}
+{"lastName": "Person", "email": "valid@fake.com"}
 
 ###
 
 # missing last name
 POST http://localhost:8080/customers
-Accept: application/yaml, application/json
 Content-Type: application/json
 
-{"firstName": "Paulo"}
+{"firstName": "Fake", "email": "valid@fake.com"}
 
 ###
 
-# names too short
+# missing email
 POST http://localhost:8080/customers
-Accept: application/yaml, application/json
 Content-Type: application/json
 
-{"firstName": "Pa", "lastName": "Vi"}
+{"firstName": "Fake", "lastName": "Person"}
 
 ###
 
-# missing first and last names
+# first name and last name too short, email invalid
 POST http://localhost:8080/customers
-Accept: application/yaml, application/json
+Content-Type: application/json
+
+{"firstName": "Fa", "lastName": "Pe", "email": "invalid.com"}
+
+###
+
+# empty object
+POST http://localhost:8080/customers
 Content-Type: application/json
 
 {}
