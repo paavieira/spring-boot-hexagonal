@@ -1,0 +1,33 @@
+# valid
+POST http://localhost:8080/customers
+Accept: application/yaml, application/json
+Content-Type: application/json
+
+{"firstName": "Paulo", "lastName": "Vieira"}
+
+###
+
+# missing first name
+POST http://localhost:8080/customers
+Accept: application/yaml, application/json
+Content-Type: application/json
+
+{"lastName": "Vieira"}
+
+###
+
+# missing last name
+POST http://localhost:8080/customers
+Accept: application/yaml, application/json
+Content-Type: application/json
+
+{"firstName": "Paulo"}
+
+###
+
+# missing first and last names
+POST http://localhost:8080/customers
+Accept: application/yaml, application/json
+Content-Type: application/json
+
+{}
