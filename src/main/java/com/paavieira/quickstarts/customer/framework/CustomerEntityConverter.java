@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 public class CustomerEntityConverter {
 
 	public CustomerEntity convert(Customer customer) {
-		return new CustomerEntity(customer.getId(), customer.getFirstName(), customer.getLastName());
+		return new CustomerEntity(customer.getId(), customer.getFirstName(), customer.getLastName(), customer.getEmail());
 	}
 
 }

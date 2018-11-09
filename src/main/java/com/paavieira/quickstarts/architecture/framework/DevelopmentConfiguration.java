@@ -21,9 +21,9 @@ public class DevelopmentConfiguration {
 
 	@EventListener
 	public void onApplicationEvent(ContextRefreshedEvent event) {
-		Arrays.asList("Smith,Adam;Marx,Karl".split(";")).forEach(fullName -> {
-			final String[] names = fullName.split(",");
-			final CustomerEntity customer = new CustomerEntity(names[1], names[0]);
+		Arrays.asList("Smith,Adam,asmith@money.com;Marx,Karl,kmarx@comunist.gov".split(";")).forEach(s -> {
+			final String[] data = s.split(",");
+			final CustomerEntity customer = new CustomerEntity(data[1], data[0], data[2]);
 			if (!repository.exists(Example.of(customer))) {
 				repository.save(customer);
 			}

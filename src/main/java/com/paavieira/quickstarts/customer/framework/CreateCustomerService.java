@@ -21,7 +21,7 @@ public class CreateCustomerService {
 	}
 
 	public CustomerEntity save(final CustomerEntity entity) {
-		final CreateCustomerCommand command = new CreateCustomerCommand(entity.getFirstName(), entity.getLastName());
+		final CreateCustomerCommand command = new CreateCustomerCommand(entity.getFirstName(), entity.getLastName(), entity.getEmail());
 		final CreateCustomerCommandHandler handler = (CreateCustomerCommandHandler) this.handlerResolver.resolve(command);
 		final Customer customer = handler.handle(command).get(0);
 		return this.converter.convert(customer);

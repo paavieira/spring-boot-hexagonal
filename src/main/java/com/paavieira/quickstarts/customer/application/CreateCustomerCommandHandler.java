@@ -18,7 +18,7 @@ public class CreateCustomerCommandHandler implements CommandHandler<CreateCustom
 
 	@Override
 	public List<Customer> handle(CreateCustomerCommand command) {
-		final Customer created = Customer.create(command.getFirstName(), command.getLastName());
+		final Customer created = Customer.create(command.getFirstName(), command.getLastName(), command.getEmail());
 		final Customer saved = this.repository.save(created);
 		return Arrays.asList(saved);
 	}

@@ -9,18 +9,20 @@ public class Customer implements Model {
 	private final String id;
 	private final String firstName;
 	private final String lastName;
+	private final String email;
 
-	private Customer(final String id, final String firstName, final String lastName) {
+	private Customer(final String id, final String firstName, final String lastName, final String email) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.email = email;
 	}
 
-	public static Customer create(final String firstName, final String lastName) {
-		return Customer.create(null, firstName, lastName);
+	public static Customer create(final String firstName, final String lastName, final String email) {
+		return Customer.create(null, firstName, lastName, email);
 	}
 
-	public static Customer create(final String id, final String firstName, final String lastName) {
+	public static Customer create(final String id, final String firstName, final String lastName, final String email) {
 
 		final boolean isFirstNameEmpty = StringUtils.isEmpty(firstName);
 		final boolean isLastNameEmpty = StringUtils.isEmpty(lastName);
@@ -29,7 +31,12 @@ public class Customer implements Model {
 			throw new InvalidCustomerName(firstName, lastName);
 		}
 
-		return new Customer(id, firstName, lastName);
+		final boolean isEmailEmpty = StringUtils.isEmpty(email);
+		if (isEmailEmpty) {
+			throw new InvalidCustomerEmail(email);
+		}
+
+		return new Customer(id, firstName, lastName, email);
 
 	}
 
@@ -43,6 +50,10 @@ public class Customer implements Model {
 
 	public String getLastName() {
 		return lastName;
+	}
+
+	public String getEmail() {
+		return email;
 	}
 
 }

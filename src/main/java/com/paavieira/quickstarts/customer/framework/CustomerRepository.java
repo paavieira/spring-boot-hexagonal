@@ -20,7 +20,7 @@ public class CustomerRepository implements Repository<Customer> {
 
 	@Override
 	public Customer save(Customer customer) {
-		final CustomerEntity entity = repository.save(new CustomerEntity(customer.getFirstName(), customer.getLastName()));
+		final CustomerEntity entity = repository.save(new CustomerEntity(customer.getFirstName(), customer.getLastName(), customer.getEmail()));
 		return this.convert(entity);
 	}
 
@@ -35,7 +35,7 @@ public class CustomerRepository implements Repository<Customer> {
 	}
 
 	private Customer convert(CustomerEntity entity) {
-		return Customer.create(entity.getId(), entity.getFirstName(), entity.getLastName());
+		return Customer.create(entity.getId(), entity.getFirstName(), entity.getLastName(), entity.getEmail());
 	}
 
 }
