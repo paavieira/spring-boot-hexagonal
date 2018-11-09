@@ -25,6 +25,15 @@ Content-Type: application/json
 
 ###
 
+# names too short
+POST http://localhost:8080/customers
+Accept: application/yaml, application/json
+Content-Type: application/json
+
+{"firstName": "Pa", "lastName": "Vi"}
+
+###
+
 # missing first and last names
 POST http://localhost:8080/customers
 Accept: application/yaml, application/json
