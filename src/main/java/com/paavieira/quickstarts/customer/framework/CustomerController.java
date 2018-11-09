@@ -3,6 +3,8 @@ package com.paavieira.quickstarts.customer.framework;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import javax.validation.Valid;
+
 import com.paavieira.quickstarts.architecture.framework.BadRequestException;
 import com.paavieira.quickstarts.architecture.framework.NotFoundException;
 import com.paavieira.quickstarts.customer.domain.InvalidCustomerName;
@@ -35,7 +37,7 @@ public class CustomerController {
 
 	@PostMapping
 	@ResponseBody
-	public CustomerEntity create(@RequestBody(required = true) CustomerEntity customer) {
+	public CustomerEntity create(@RequestBody(required = true) @Valid final CustomerEntity customer) {
 
 		try {
 			return createService.save(customer);
@@ -48,6 +50,7 @@ public class CustomerController {
 	@GetMapping("/{id}")
 	@ResponseBody
 	public List<CustomerEntity> getSingle(@PathVariable("id") final String id) {
+
 		try {
 			return findService.find(id);
 		} catch (NoSuchElementException e) {

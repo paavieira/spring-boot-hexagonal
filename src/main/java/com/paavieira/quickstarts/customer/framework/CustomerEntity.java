@@ -1,13 +1,19 @@
 package com.paavieira.quickstarts.customer.framework;
 
+import javax.validation.constraints.Size;
+
 import org.springframework.data.annotation.Id;
 
+@ValidFullName
 public class CustomerEntity {
 
 	@Id
 	private String id;
 
+	@Size(min = 3, message = "First name is too short")
 	private String firstName;
+
+	@Size(min = 3, message = "Last name is too short")
 	private String lastName;
 
 	public CustomerEntity() {}
