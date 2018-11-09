@@ -4,7 +4,7 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+import static java.util.stream.Collectors.*;
 
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -29,11 +29,11 @@ public class MethodArgumentNotValidExceptionHandler {
 
 		final int globalErrorCount = result.getGlobalErrorCount();
 		final List<String> globalErrors = result.getGlobalErrors().stream()
-			.map(ge -> ge.getDefaultMessage()).collect(Collectors.toList());
+			.map(ge -> ge.getDefaultMessage()).collect(toList());
 
 		final int fieldErrorCount = result.getFieldErrorCount();
-		final Map<String, String> fieldErrors = result.getFieldErrors().stream()
-			.collect(Collectors.toMap(FieldError::getField, FieldError::getDefaultMessage));
+		final Map<String, List<String>> fieldErrors = result.getFieldErrors().stream()
+			.collect(groupingBy(FieldError::getField, mapping(FieldError::getDefaultMessage, toList())));
 
 		return new Error(BAD_REQUEST.value(), globalErrorCount, globalErrors, fieldErrorCount, fieldErrors);
 
@@ -47,14 +47,14 @@ public class MethodArgumentNotValidExceptionHandler {
         private final List<String> globalErrors;
 
 		private final int fieldErrorCount;
-		private final Map<String, String> fieldErrors;
+		private final Map<String, List<String>> fieldErrors;
 
         private Error(
 			final int status,
 			final int globalErrorCount,
 			final List<String> globalErrors,
 			final int fieldErrorCount,
-			final Map<String, String> fieldErrors
+			final Map<String, List<String>> fieldErrors
 		) {
 			this.status = status;
 			this.globalErrorCount = globalErrorCount;
@@ -79,7 +79,7 @@ public class MethodArgumentNotValidExceptionHandler {
             return fieldErrorCount;
 		}
 
-        public Map<String, String> getFieldErrors() {
+        public Map<String, List<String>> getFieldErrors() {
             return fieldErrors;
         }
 
